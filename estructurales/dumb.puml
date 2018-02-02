@@ -1,0 +1,8 @@
+@startuml
+title Title\n
+skinparam linetype polyline
+skinparam linetype ortho
+
+skinparam defaultFontName "Fira Code Retina"
+
+@enduml
