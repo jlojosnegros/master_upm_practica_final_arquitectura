@@ -12,9 +12,33 @@ Aqui podemos ver un diagrama general de la arquitectura propuesta:
 
 ![Image](./estructurales/general_model.png)
 
-### Fuerzas que empujan a utilizar ese patrón o patrones
-### Consecuencias de utilizar dicho patrón o patrones
-### Responsabilidades inherentes a utilizar dicho patrón o patrones
+### Patrón Broker
+#### Fuerzas y Consecuencias
+El procesado de los logs se ha convertido en un cuello de botella de manera que necesitamos una manera 
+en la que poder distribuir ese procesado para repartir la carga. Para poder además aumentar o disminuir
+según las necesidades, la potencia de procesado necesitamos ser capaces de dar de alta o de baja elementos
+de procesado sin que los generadores de log se vean impactados.
+
+Esto lo podemos conseguir mediante la utilización del patrón Broker que permite abstraer a los elementos que 
+generan logs de la situación de aquellos que proveen el servicio de procesado de los mismos. Además conseguimos 
+poder repartir la carga entre los distintos procesadores ya que los generadores no conocen a los procesadores.
+
+También es importante el poder introducir nuevos generadores de logs en el sistema, tanto de los tipos conocidos
+como de otros tipos nuevos, con el menor impacto posible para el mismo. Si el nuevo generador es de un tipo conocido 
+en el sistema (actualemente aplicaciones o sistemas) el impacto es aproximadamente nulo, siempre que la carga 
+actual del sistema no este cerca del límite, en cuyo caso simplemente habría que añadir nuevos elementos 
+procesadores de logs. En el caso de que se tratase de un nuevo tipo de generador de log, si que tendríamos que 
+modificar los procesadores de logs para que fueran capaces de procesar este nuevo tipo, pero dicha modificación
+no afectaría a los procesados que se lleven a cabo en el sistema actualmente.
+
+#### Responsabilidades
+
+Debido a la deslocalización de los procesadores de logs deberiamos de proveer de un sistema de autodescubrimiento 
+tanto para los elementos generadores de logs como para los elementos procesadores. Este sistema podría perfectamente
+estar incluido dentro de los _communication components_ que se ven en el diagrama y que independizan a los elementos
+de los detalles de las comunicaciones en el sistema.
+
+### Patrón Pipeline
 
 ## 2.- Definir la estructura de la solución idicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
 
