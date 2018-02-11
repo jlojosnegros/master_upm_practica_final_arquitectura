@@ -53,9 +53,9 @@ package "pipeline" as p2 {
 cc_pipeline2 --> spf2
 spf2 --> ns2 : app_log
 spf2 --> spt2 : sys_log
-ns2 -> spt2
-spt2 ->fw2
-fw2 -> add2
+ns2 -left-> spt2
+spt2 -left->fw2
+fw2 -left-> add2
 }
 
 
