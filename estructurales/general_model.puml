@@ -1,0 +1,80 @@
+@startuml
+skinparam linetype polyline
+skinparam linetype ortho
+
+skinparam defaultFontName "Fira Code Retina"
+
+
+package "aplication" {
+[application] as app1
+[communication component] as cc_application
+
+app1 --> cc_application : payload
+}
+
+package "system" {
+[system] as sys1
+[communication component] as cc_system
+sys1  --> cc_system : payload
+}
+
+package "broker" as brk1 {
+[bridge] as bdg1
+}
+
+package "broker" as brk2 {
+[bridge] as bdg2
+}
+
+package "pipeline" as p1 {
+[split fields] as spf1
+[normalize severity] as ns1
+[split text] as spt1
+[filter words] as fw1
+[add to standard.log] as add1
+
+spf1 --> ns1 : app_log
+spf1 --> spt1 : sys_log
+ns1 -> spt1
+spt1 ->fw1
+fw1 -> add1
+}
+
+package "pipeline" as p2 {
+[split fields] as spf2
+[normalize severity] as ns2
+[split text] as spt2
+[filter words] as fw2
+[add to standard.log] as add2
+
+spf2 --> ns2 : app_log
+spf2 --> spt2 : sys_log
+ns2 -> spt2
+spt2 ->fw2
+fw2 -> add2
+}
+
+
+package "blackboard" as BB {
+[blackboard] as bb
+[log comparator] as lc
+[language processor] as lp
+[automatic learning] as al
+
+lc --> bb : read/write
+lp --> bb : read/write
+al --> bb : read/write
+}
+
+
+cc_application --> brk1 : app_log + payload
+brk1 --> spf1 : app_log + payload
+add1 --> bb : write
+cc_system --> brk1 : sys + payload
+brk1 --> bdg1
+bdg1 -left-> bdg2
+bdg2 --> brk2
+brk2 --> spf2 : sys_log + payload
+add2 --> bb : write
+
+@enduml

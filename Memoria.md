@@ -2,6 +2,16 @@
 
 ## 1.- Decidir y justificar el patrón o patrones arquitectónicos a aplicar para la aplicación.
 
+Los patrones elegidos han sido 
+
+1. Broker
+2. Pipeline
+3. Blackboard
+
+Aqui podemos ver un diagrama general de la arquitectura propuesta:
+
+![Image](./estructurales/general_model.png)
+
 ### Fuerzas que empujan a utilizar ese patrón o patrones
 ### Consecuencias de utilizar dicho patrón o patrones
 ### Responsabilidades inherentes a utilizar dicho patrón o patrones
