@@ -60,6 +60,7 @@ fw2 -> add2
 
 
 package "blackboard" as BB {
+[controller] as cc
 [blackboard] as bb
 [log comparator] as lc
 [language processor] as lp
@@ -68,6 +69,9 @@ package "blackboard" as BB {
 lc --> bb : read/write
 lp --> bb : read/write
 al --> bb : read/write
+cc -- lc
+cc -- lp
+cc -- al
 }
 
 
@@ -78,7 +82,7 @@ cc_system --> brk1 : sys + payload
 brk1 --> bdg1
 bdg1 -left-> bdg2
 bdg2 --> brk2
-brk2 --> cc_pipeline2 : sys_log + payload
+brk2 -right-> cc_pipeline2 : sys_log + payload
 add2 --> bb : write
 
 @enduml
