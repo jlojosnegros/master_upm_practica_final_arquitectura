@@ -52,6 +52,20 @@ Pipeline__ dentro de cada uno de los elementos de procesado de logs parezca los 
 Deberiamos de aportar un sistema de gestión de errores para el caso en el que un log llegase con un formato errorneo o 
 algo similar.
 
+### Patrón Blackboard
+#### Fuerzas y Consecuencias
+En la descripción del problema se deja claro que el sistema de análisis de logs es no determinista y que se require de
+la colaboración de varios elementos expertos en distintas areas (aprendizaje automatico, procesado de lenguajes naturales, .. )
+para poder llegar a una posible solución. Todo esto nos lleva a pensar que el __patrón Blackboard__ sea el más adecuado.
+
+Mediante la aplicación de dicho patrón, y dado que todos los elementos que trabajan para la composicion de la solución 
+trabajan sobre el mismo grupo de datos, podemos conseguir la requeria flexibilidad a la hora de añadir, modificar y eliminar
+herramientas de análisis, así como asegurar el contexto adecuado para realizar el análisis ya que todos los logs terminan
+entrando en el blackboard.
+
+#### Responsabilidades
+
+
 ## 2.- Definir la estructura de la solución idicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
 
 ## 3.- Definir la dinámica de la solución, señalando el comportamiento de los diferentes elementos del patrón o patrones ante los diferentes tipos de acciones
