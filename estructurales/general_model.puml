@@ -75,6 +75,23 @@ cc -- al
 }
 
 
+'aplication -[hidden]down- brk1
+'''system -[hidden]down- brk1
+'aplication -[hidden]down- brk2
+'''system -[hidden]down- brk2
+'
+'brk1 -[hidden]left- brk2
+'
+'
+'brk1 -[hidden]right- p1
+'brk1 -[hidden]down- p2
+'brk2 -[hidden]down- p1
+'brk2 -[hidden]down- p2
+'
+'p1 -[hidden]left- p2
+'
+'p1 -[hidden]down- BB
+'p2 -[hidden]down- BB
 cc_application --> brk1 : app_log + payload
 brk1 --> cc_pipeline1 : app_log + payload
 add1 --> bb : write
