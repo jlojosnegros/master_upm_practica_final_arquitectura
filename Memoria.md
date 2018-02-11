@@ -14,6 +14,7 @@ Aqui podemos ver un diagrama general de la arquitectura propuesta:
 
 ### Patrón Broker
 #### Fuerzas y Consecuencias
+
 El procesado de los logs se ha convertido en un cuello de botella de manera que necesitamos una manera 
 en la que poder distribuir ese procesado para repartir la carga. Para poder además aumentar o disminuir
 según las necesidades, la potencia de procesado necesitamos ser capaces de dar de alta o de baja elementos
@@ -39,6 +40,17 @@ estar incluido dentro de los _communication components_ que se ven en el diagram
 de los detalles de las comunicaciones en el sistema.
 
 ### Patrón Pipeline
+#### Fuerzas y Consecuencias
+
+Se pide que exista una flexibilidad en el sistema a la hora de realizar el procesamiento de los logs de manera que se 
+pueda modificar, eliminar o añadir etapas dentro de las definidas. Esto junto con el hecho de que el procesado de los 
+logs esta evidentemente dirigido por el flujo de los datos a través de distintas etapas, hace que utilizar el __patrón
+Pipeline__ dentro de cada uno de los elementos de procesado de logs parezca los más apropiado.
+
+#### Responsabilidades
+
+Deberiamos de aportar un sistema de gestión de errores para el caso en el que un log llegase con un formato errorneo o 
+algo similar.
 
 ## 2.- Definir la estructura de la solución idicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
 
