@@ -20,7 +20,7 @@ en la que poder distribuir ese procesado para repartir la carga. Para poder adem
 según las necesidades, la potencia de procesado necesitamos ser capaces de dar de alta o de baja elementos
 de procesado sin que los generadores de log se vean impactados.
 
-Esto lo podemos conseguir mediante la utilización del patrón Broker que permite abstraer a los elementos que 
+Esto lo podemos conseguir mediante la utilización del __patrón Broker__ que permite abstraer a los elementos que 
 generan logs de la situación de aquellos que proveen el servicio de procesado de los mismos. Además conseguimos 
 poder repartir la carga entre los distintos procesadores ya que los generadores no conocen a los procesadores.
 
@@ -66,6 +66,6 @@ entrando en el blackboard.
 #### Responsabilidades
 
 
-## 2.- Definir la estructura de la solución idicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
+## 2.- Definir la estructura de la solución indicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
 
 ## 3.- Definir la dinámica de la solución, señalando el comportamiento de los diferentes elementos del patrón o patrones ante los diferentes tipos de acciones
