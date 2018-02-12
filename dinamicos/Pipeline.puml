@@ -1,4 +1,9 @@
 @startuml
+skinparam linetype polyline
+skinparam linetype ortho
+
+skinparam defaultFontName "Fira Code Retina"
+
 |Steps Register|
 :Get Types;
 |Field Splitter|
