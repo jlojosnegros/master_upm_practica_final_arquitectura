@@ -1,0 +1,35 @@
+@startuml
+skinparam linetype polyline
+skinparam linetype ortho
+
+skinparam defaultFontName "Fira Code Retina"
+
+participant "log Generator" as lg
+participant "client communication component" as ccc
+participant "broker" as brk
+participant "server communication component" as scc
+participant "log processor" as lp
+
+activate lg
+lg -> ccc : write log
+deactivate lg
+activate ccc
+ccc --> lg : ack
+activate lg
+ccc --> ccc : compose data = type + log
+ccc --> ccc : marshaling
+ccc -> brk : send data
+deactivate ccc
+activate brk
+brk --> brk : look for processor
+brk -> scc : forward data
+deactivate brk
+activate scc
+scc --> scc : demarshaling
+scc -> lp : write data
+deactivate scc
+activate lp
+lp --> lp : handle data using type
+deactivate lp
+deactivate lg
+@enduml
