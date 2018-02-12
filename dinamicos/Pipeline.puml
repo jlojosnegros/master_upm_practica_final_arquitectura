@@ -1,0 +1,19 @@
+@startuml
+|Steps Register|
+:Get Types;
+|Field Splitter|
+:Split Fields;
+if (type is application) then
+|Severity Normalizer|
+:Normalize Severity;
+endif
+|Text Splitter|
+:Split Text as st;
+|Word Filter|
+:Filter Words;
+|Log Adder|
+:Add log to standard.log;
+end
+@enduml
+
+
