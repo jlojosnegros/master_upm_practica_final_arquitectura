@@ -20,7 +20,7 @@ interface announce
 interface receive_logs
 [Communication Component] as cc
 
-receive_logs --> cc
+receive_logs -down-> cc
 cc --> send_logs
 
 register_logger ..> cc
@@ -38,8 +38,10 @@ interface send_data
 
 [Register Manager] as rm
 [Communications] as cb
+database comm_elements as db
 
 rm -- cb
+rm -left- db
 
 b_register_logger ..> rm
 b_register_processor ..> rm
@@ -96,6 +98,6 @@ lp_setup_comms ..> b_register_processor
 send_logs --> accept_data
 
 '' Data Path: broker to processors
-send_data --> lp_receive_logs
-lp_send_logs --> LA
+send_data -right-> lp_receive_logs
+lp_send_logs -right-> LA
 @enduml
