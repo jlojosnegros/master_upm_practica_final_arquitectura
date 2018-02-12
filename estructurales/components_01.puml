@@ -1,0 +1,95 @@
+@startuml
+
+skinparam linetype polyline
+'skinparam linetype ortho
+
+skinparam defaultFontName "Fira Code Retina"
+
+package "Logger" {
+
+[Application]
+[System]
+
+}
+
+package "Client Communication Component" as CCC {
+interface register_logger
+interface send_logs
+interface setup_comms
+interface announce
+interface receive_logs
+[Communication Component] as cc
+
+receive_logs -right-> cc
+register_logger -down-> cc
+
+cc -right-> send_logs
+cc .down.> announce
+cc <.up. announce
+cc .down.> setup_comms
+}
+
+package "Broker" {
+interface listen_for_announces
+interface register_logger as b_register_logger
+interface register_processor as b_register_processor
+interface accept_data
+interface send_data
+
+[Register Manager] as rm
+[Communications] as cb
+
+rm -- cb
+
+b_register_logger ..> rm
+b_register_processor ..> rm
+listen_for_announces ..> rm
+listen_for_announces <.. rm
+
+cb -left-> send_data
+accept_data -left-> cb
+
+}
+
+package "Log Processor" as LP {
+
+interface announce as lp_announce
+interface setup_comms as lp_setup_comms
+interface receive_logs as lp_receive_logs
+
+[Communication Component] as lpcc
+[Log Processor] as lp
+
+lpcc -> lp
+lpcc ..> lp_setup_comms
+lpcc ..> lp_announce
+lpcc <.. lp_announce
+lp_receive_logs -> lpcc
+}
+
+package "Log Analyzer" as LA {
+}
+
+[Application] ..> register_logger
+[System] ..> register_logger
+
+announce ..> listen_for_announces
+listen_for_announces ..> announce
+setup_comms ..> b_register_logger
+
+
+lp_announce ..> listen_for_announces
+listen_for_announces ..> lp_announce
+lp_setup_comms ..> b_register_processor
+
+'' Data Path: Apps to client comms
+[Application] --> receive_logs
+[System] --> receive_logs
+
+'' Data Path: client comms to broker
+send_logs --> accept_data
+
+'' Data Path: broker to processors
+send_data --> lp_receive_logs
+lp --> LA
+@enduml
