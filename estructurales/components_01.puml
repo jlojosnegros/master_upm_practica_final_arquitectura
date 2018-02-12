@@ -20,10 +20,10 @@ interface announce
 interface receive_logs
 [Communication Component] as cc
 
-receive_logs -right-> cc
-register_logger -down-> cc
+receive_logs --> cc
+cc --> send_logs
 
-cc -right-> send_logs
+register_logger ..> cc
 cc .down.> announce
 cc <.up. announce
 cc .down.> setup_comms
@@ -46,8 +46,8 @@ b_register_processor ..> rm
 listen_for_announces ..> rm
 listen_for_announces <.. rm
 
-cb -left-> send_data
-accept_data -left-> cb
+cb --> send_data
+accept_data --> cb
 
 }
 
@@ -56,20 +56,26 @@ package "Log Processor" as LP {
 interface announce as lp_announce
 interface setup_comms as lp_setup_comms
 interface receive_logs as lp_receive_logs
+interface "send_processed_logs" as lp_send_logs
 
 [Communication Component] as lpcc
 [Log Processor] as lp
 
-lpcc -> lp
+lp_receive_logs -up-> lpcc
+lpcc -up-> lp
+lp -up-> lp_send_logs
+
 lpcc ..> lp_setup_comms
 lpcc ..> lp_announce
 lpcc <.. lp_announce
-lp_receive_logs -> lpcc
+
+
 }
 
 package "Log Analyzer" as LA {
 }
 
+'' Configuration
 [Application] ..> register_logger
 [System] ..> register_logger
 
@@ -91,5 +97,5 @@ send_logs --> accept_data
 
 '' Data Path: broker to processors
 send_data --> lp_receive_logs
-lp --> LA
+lp_send_logs --> LA
 @enduml
