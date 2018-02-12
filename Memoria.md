@@ -67,5 +67,13 @@ entrando en el blackboard.
 
 
 ## 2.- Definir la estructura de la solución indicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
+### Broker y comunicaciones
+![Image](./estructurales/components_01.png)
+### Pipeline 
+![Image](./estructurales/components_log_processor.png)
 
 ## 3.- Definir la dinámica de la solución, señalando el comportamiento de los diferentes elementos del patrón o patrones ante los diferentes tipos de acciones
+### Secuencia de Comunicaciones entre los generadores de logs y los procesadores
+![Image](./dinamicos/communications.png)
+### Actividad del Pipeline
+![Image](./dinamicos/Pipeline.png)
