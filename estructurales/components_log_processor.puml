@@ -1,0 +1,42 @@
+@startuml
+skinparam linetype polyline
+'skinparam linetype ortho
+
+skinparam defaultFontName "Fira Code Retina"
+
+package "Log Processor" {
+interface accept_data
+interface send_data
+[Steps Register] as sr
+[Field Splitter] as fs
+[Serverity Normalizer] as sn
+[Text Splitter] as ts
+[Word Filter] as wf
+[Log Accumulator] as la
+
+accept_data -> sr
+sr --> fs
+fs --> sn
+fs --> ts
+sn --> ts
+ts --> wf
+wf --> la
+la --> send_data
+
+'fs . sr
+'sn . sr
+'ts . sr
+'wf . sr
+
+
+note right of sr
+  Checks data "type"
+  and configure steps
+  in the pipeline
+end note
+
+
+}
+
+
+@enduml
