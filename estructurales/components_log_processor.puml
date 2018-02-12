@@ -14,14 +14,14 @@ interface send_data
 [Word Filter] as wf
 [Log Accumulator] as la
 
-accept_data -> sr
-sr --> fs
-fs --> sn
-fs --> ts
-sn --> ts
-ts --> wf
-wf --> la
-la --> send_data
+accept_data -> sr : data = type + log
+sr -> fs : log
+fs --> sn : fields
+fs -down-> ts : fields
+sn -> ts : fields (severity changed)
+ts -> wf : fields + word listt
+wf -> la : fields + filtered word list
+la -> send_data
 
 'fs . sr
 'sn . sr
@@ -29,7 +29,7 @@ la --> send_data
 'wf . sr
 
 
-note right of sr
+note top of sr
   Checks data "type"
   and configure steps
   in the pipeline
