@@ -69,8 +69,33 @@ entrando en el blackboard.
 ## 2.- Definir la estructura de la solución indicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
 ### Broker y comunicaciones
 ![Image](./estructurales/components_01.png)
+
+Los llamados "Client Communication Component" harían las veces de proxies del cliente, encargandose de anunciar su existencia
+al Broker, contestando este mediante la manera de acceder al interface de configuración de comunicaciones para que el proxy
+pueda registrarse correctamente ante el Broker.
+
+El Logger deberá registrarse en su proxy indicando su tipo, que actualmente solo podría ser: "application" o "system".
+
+Cuando el Logger envie tramas de log a su proxy este las reenviará a un procesador de logs mediante el Broker.
+
+
+
+El elemento "Register Manager" se encargará de mantener un registro tanto de clientes como de servidores registrados, así
+como de un listado de los servicios que estos últimos ofrecen.
+Cuando un proxy de cliente envíe datos al broker, el elemento "Communications" pedirá al "Register Manager" un servidor 
+a quien redirigirle la trama de entre todos los registrados. 
+
+Por otro lado el "Server Communication Component" realizaría las labores inversas a las del "Client Communication Component",
+abstrayendo así a los servidores de las comunicaciones y funcionando por tanto como un proxy en el lado del cliente.
+
+
 ### Pipeline 
 ![Image](./estructurales/components_log_processor.png)
+
+La primera de las etapas de este Pipeline se encargaría de, en función del valor del campo "type" recibido en la trama,
+"programar" los elementos del pipeline que atravesará dicha trama, ya que el tratamiento de los logs de un elemento de 
+tipo "application" es ligeramente diferente del tratamiento para los de un elemento de tipo "system".
+
 
 ## 3.- Definir la dinámica de la solución, señalando el comportamiento de los diferentes elementos del patrón o patrones ante los diferentes tipos de acciones
 ### Secuencia de Comunicaciones entre los generadores de logs y los procesadores
