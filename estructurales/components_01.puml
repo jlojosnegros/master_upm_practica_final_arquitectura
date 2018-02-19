@@ -5,6 +5,7 @@ skinparam linetype polyline
 
 skinparam defaultFontName "Fira Code Retina"
 
+cloud Client {
 package "Logger" {
 
 [Application]
@@ -28,7 +29,7 @@ cc .down.> announce
 cc <.up. announce
 cc .down.> setup_comms
 }
-
+}
 package "Broker" {
 interface listen_for_announces
 interface register_logger as b_register_logger
@@ -53,14 +54,21 @@ accept_data --> cb
 
 }
 
-package "Log Processor" as LP {
+cloud Server {
+package "Server Communication Component" as SCC {
 
 interface announce as lp_announce
 interface setup_comms as lp_setup_comms
 interface receive_logs as lp_receive_logs
-interface "send_processed_logs" as lp_send_logs
 
 [Communication Component] as lpcc
+}
+
+package "Log Processor" as LP {
+
+interface "send_processed_logs" as lp_send_logs
+
+
 [Log Processor] as lp
 
 lp_receive_logs -up-> lpcc
@@ -73,7 +81,7 @@ lpcc <.. lp_announce
 
 
 }
-
+}
 package "Log Analyzer" as LA {
 }
 
