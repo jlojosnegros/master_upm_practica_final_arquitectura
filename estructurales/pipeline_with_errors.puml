@@ -1,37 +1,43 @@
 @startuml
 title Pipeline
-skinparam linetype polyline
+'skinparam linetype polyline
 'skinparam linetype ortho
 
 skinparam defaultFontName "Fira Code Retina"
 
+database IncidentDB {
+}
 
 package "Log Processor" {
 interface accept_data
 interface send_data
-
+interface send_error
 [Steps Register] as sr
 [Field Splitter] as fs
 [Serverity Normalizer] as sn
 [Text Splitter] as ts
 [Word Filter] as wf
 [Log Accumulator] as la
+[Error Handler] as eh
 
-
-accept_data -> sr : data = type + log
-sr -> fs : log
-fs --> sn : fields
-fs -down-> ts : fields
-sn -> ts : fields (severity changed)
-ts -> wf : fields + word listt
-wf -> la : fields + filtered word list
+accept_data --> sr
+sr --> fs
+fs --> sn
+fs --> ts
+sn -> ts
+ts -> wf
+wf -> la
 la -> send_data
 
-note top of sr
-  Checks data "type"
-  and configure steps
-  in the pipeline
-end note
+sr ..> eh : error
+fs ..> eh : error
+sn ..> eh : error
+ts ..> eh : error
+wf ..> eh : error
+la ..> eh : error
 
+
+eh --> send_error
+send_error --> IncidentDB
 }
 @enduml

@@ -18,6 +18,8 @@ Aquí podemos ver un diagrama general de la arquitectura propuesta:
 
 ![Image](./estructurales/general_model.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Patrón Broker
 #### Fuerzas y Consecuencias
 
@@ -32,14 +34,17 @@ actual del sistema no este cerca del límite, en cuyo caso simplemente habría q
 
 Debido a la deslocalización de los procesadores de logs deberíamos de proveer de un sistema de autodescubrimiento tanto para los elementos generadores de logs como para los elementos procesadores. Este sistema podría perfectamente estar incluido dentro de los _communication components_ que se ven en el diagrama y que independizan a los elementos de los detalles de las comunicaciones en el sistema.
 
+
 ### Patrón Pipeline
 #### Fuerzas y Consecuencias
 
 Se pide que exista una flexibilidad en el sistema a la hora de realizar el procesamiento de los logs de manera que se pueda modificar, eliminar o añadir etapas dentro de las definidas. Esto junto con el hecho de que el procesado de los logs esta evidentemente dirigido por el flujo de los datos a través de distintas etapas, hace que utilizar el __patrón Pipeline__ dentro de cada uno de los elementos de procesado de logs parezca los más apropiado.
 
 #### Responsabilidades
+![Image](./estructurales/pipeline_with_errors.png)
 
-Deberíamos de aportar un sistema de gestión de errores para el caso en el que un log llegase con un formato erróneo o algo similar.
+Como podemos ver en el diagrama de detalle del pipeline, cuando una de las etapas encuentra un error a la hora de procesar los logs lo envia a un elemento de procesado de errores que
+a su vez lo envía a una base de datos desde donde después esta información podrá ser consultada.
 
 ### Patrón Blackboard
 #### Fuerzas y Consecuencias
@@ -49,6 +54,8 @@ Mediante la aplicación de dicho patrón, y dado que todos los elementos que tra
 
 #### Responsabilidades
 
+
+<div style="page-break-after: always;"></div>
 
 ## 2.- Definir la estructura de la solución indicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
 ### Broker y comunicaciones
@@ -67,15 +74,21 @@ Cuando un proxy de cliente envíe datos al broker, el elemento "Communications" 
 
 Por otro lado el "Server Communication Component" realizaría las labores inversas a las del "Client Communication Component", abstrayendo así a los servidores de las comunicaciones y funcionando por tanto como un proxy en el lado del cliente.
 
-
 ### Pipeline
 ![Image](./estructurales/components_log_processor.png)
 
 La primera de las etapas de este Pipeline se encargaría de, en función del valor del campo "type" recibido en la trama, "programar" los elementos del pipeline que atravesará dicha trama, ya que el tratamiento de los logs de un elemento de tipo "application" es ligeramente diferente del tratamiento para los de un elemento de tipo "system".
 
+<div style="page-break-after: always;"></div>
 
 ## 3.- Definir la dinámica de la solución, señalando el comportamiento de los diferentes elementos del patrón o patrones ante los diferentes tipos de acciones
 ### Secuencia de Comunicaciones entre los generadores de logs y los procesadores
 ![Image](./dinamicos/communications.png)
 ### Actividad del Pipeline
 ![Image](./dinamicos/Pipeline.png)
+
+
+
+
+
+
