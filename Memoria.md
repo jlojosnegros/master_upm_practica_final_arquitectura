@@ -1,5 +1,11 @@
-# Memoria Práctica final de Arquitectura Software.
+# <p style="text-align: center">Memoria Práctica final </br>de </br>Arquitectura Software.</p>
+</br></br></br></br>
+</br></br></br></br>
+#### <p style="text-align: center"> Sonia Pardillo</p>
+#### <p style="text-align: center"> Jose Manuel Almaza</p>
+#### <p style="text-align: center"> Jose Luis Ojosnegros</p>
 
+<div style="page-break-after: always;"></div>
 ## 1.- Decidir y justificar el patrón o patrones arquitectónicos a aplicar para la aplicación.
 
 Los patrones elegidos han sido
