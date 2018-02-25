@@ -53,7 +53,9 @@ En la descripción del problema se deja claro que el sistema de análisis de log
 Mediante la aplicación de dicho patrón, y dado que todos los elementos que trabajan para la composición de la solución trabajan sobre el mismo grupo de datos, podemos conseguir la requerida flexibilidad a la hora de añadir, modificar y eliminar herramientas de análisis, así como asegurar el contexto adecuado para realizar el análisis ya que todos los logs terminan entrando en el blackboard.
 
 #### Responsabilidades
+Debido a que la precisión de las herramientas de aprendizaje automático es de un 40%-60%, no se garantiza una solución de calidad. Se basa en unos datos de poca fiabilidad.
 
+En este ejercicio no consideramos que exista dificultad para diseñar una buena estrategia de control. Las herramientas de comparación de logs y las de procesamiento de lenguaje pueden trabajar en paralelo, y cuando tengan un resultado lo envían a la tercera herramienta, herramienta de aprendizaje automático.
 
 <div style="page-break-after: always;"></div>
 
@@ -87,7 +89,12 @@ La primera de las etapas de este Pipeline se encargaría de, en función del val
 ### Actividad del Pipeline
 ![Image](./dinamicos/Pipeline.png)
 
+<div style="page-break-after: always;"></div>
 
+## Vista física.
+La vista física representa como están distribuidos los componentes entre los distintos equipos que conforman la solución. A continuación presentamos el diagrama de despliegue, en el cual se relacionan los diferentes nodos que serán usados en el sistema de incidencias.
+### Diagrama de despliegue
+![Image](./estructurales/deployment.png)
 
 
 
