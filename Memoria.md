@@ -55,7 +55,7 @@ Mediante la aplicación de dicho patrón, y dado que todos los elementos que tra
 #### Responsabilidades
 Debido a que la precisión de las herramientas de aprendizaje automático es de un 40%-60%, no se garantiza una solución de calidad. Se basa en unos datos de poca fiabilidad.
 
-En este ejercicio no consideramos que exista dificultad para diseñar una buena estrategia de control. Las herramientas de comparación de logs y las de procesamiento de lenguaje pueden trabajar en paralelo, y cuando tengan un resultado lo envían a la tercera herramienta, herramienta de aprendizaje automático.
+En este ejercicio no consideramos que exista dificultad para diseñar una buena estrategia de control. Las herramientas de comparación de logs y las de procesamiento de lenguaje pueden trabajar en paralelo, y cuando tienen un resultado lo envían a la tercera herramienta, herramienta de aprendizaje automático.
 
 <div style="page-break-after: always;"></div>
 
