@@ -96,6 +96,14 @@ La vista física representa como están distribuidos los componentes entre los d
 ### Diagrama de despliegue
 ![Image](./estructurales/deployment.png)
 
+<div style="page-break-after: always;"></div>
+
+## Otras arquitecturas alternativas.
+Una alternativa a la arquitectura presentada, podría ser otra basada en Microservicios. El diagrama que se muestra a continuación, respresenta dicha arquitectura eludiendo elementos asociados a dicha arquitectura como el service discovery o un servicio de monitorización, que se dan por obvios.
+
+![Image](./arquitecturamicroservicios.png)
+
+
 
 
 
