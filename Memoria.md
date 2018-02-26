@@ -16,7 +16,8 @@ Los patrones elegidos han sido
 
 Aquí podemos ver un diagrama general de la arquitectura propuesta:
 
-![Image](./estructurales/general_model.png)
+![Image](./estructurales/general_model.png "general_model.png")
+*general_model.png*
 
 <div style="page-break-after: always;"></div>
 
@@ -41,7 +42,8 @@ Debido a la deslocalización de los procesadores de logs deberíamos de proveer 
 Se pide que exista una flexibilidad en el sistema a la hora de realizar el procesamiento de los logs de manera que se pueda modificar, eliminar o añadir etapas dentro de las definidas. Esto junto con el hecho de que el procesado de los logs esta evidentemente dirigido por el flujo de los datos a través de distintas etapas, hace que utilizar el __patrón Pipeline__ dentro de cada uno de los elementos de procesado de logs parezca los más apropiado.
 
 #### Responsabilidades
-![Image](./estructurales/pipeline_with_errors.png)
+![Image](./estructurales/pipeline_with_errors.png "pipeline_with_errors.png")
+*pipeline_with_errors.png*
 
 Como podemos ver en el diagrama de detalle del pipeline, cuando una de las etapas encuentra un error a la hora de procesar los logs lo envia a un elemento de procesado de errores que
 a su vez lo envía a una base de datos desde donde después esta información podrá ser consultada.
@@ -61,7 +63,8 @@ En este ejercicio no consideramos que exista dificultad para diseñar una buena 
 
 ## 2.- Definir la estructura de la solución indicando cómo se corresponden los elementos de la solución con los elementos definidos en la estructura del patrón o patrones utilizados.
 ### Broker y comunicaciones
-![Image](./estructurales/components_01.png)
+![Image](./estructurales/components_01.png "components_01.png")
+*components_01.png*
 
 Los llamados "Client Communication Component" harían las veces de proxies del cliente, encargándose de anunciar su existencia al Broker, contestando este mediante la manera de acceder al interface de configuración de comunicaciones para que el proxy pueda registrarse correctamente ante el Broker.
 
@@ -77,7 +80,8 @@ Cuando un proxy de cliente envíe datos al broker, el elemento "Communications" 
 Por otro lado el "Server Communication Component" realizaría las labores inversas a las del "Client Communication Component", abstrayendo así a los servidores de las comunicaciones y funcionando por tanto como un proxy en el lado del cliente.
 
 ### Pipeline
-![Image](./estructurales/components_log_processor.png)
+![Image](./estructurales/components_log_processor.png "components_log_processor.png")
+*components_log_processor.png*
 
 La primera de las etapas de este Pipeline se encargaría de, en función del valor del campo "type" recibido en la trama, "programar" los elementos del pipeline que atravesará dicha trama, ya que el tratamiento de los logs de un elemento de tipo "application" es ligeramente diferente del tratamiento para los de un elemento de tipo "system".
 
@@ -85,24 +89,30 @@ La primera de las etapas de este Pipeline se encargaría de, en función del val
 
 ## 3.- Definir la dinámica de la solución, señalando el comportamiento de los diferentes elementos del patrón o patrones ante los diferentes tipos de acciones
 ### Secuencia de Comunicaciones entre los generadores de logs y los procesadores
-![Image](./dinamicos/communications.png)
+![Image](./dinamicos/communications.png "communications.png")
+*communications.png*
 ### Actividad del Pipeline
-![Image](./dinamicos/Pipeline.png)
+![Image](./dinamicos/Pipeline.png "Pipeline.png")
+*Pipeline.png*
 ### Diagrama de Secuencia
-![Image](./dinamicos/sequence_rotated_left.png =1500x700)
+![Image](./dinamicos/sequence_rotated_left.png =1500x650 "sequence.png")
+*sequence.png*
 
 <div style="page-break-after: always;"></div>
 
 ## Vista física.
 La vista física representa como están distribuidos los componentes entre los distintos equipos que conforman la solución. A continuación presentamos el diagrama de despliegue, en el cual se relacionan los diferentes nodos que serán usados en el sistema de incidencias.
 ### Diagrama de despliegue
-![Image](./estructurales/deployment.png)
+![Image](./estructurales/deployment.png "deployment.png")
+*deployment.png*
 
 ### Diagrama Físico
-![Image](./phisical.png =1000x250)
+![Image](./phisical.png =1000x240 "physical.png")
+*physical.png*
 <div style="page-break-after: always;"></div>
 
 ## Otras arquitecturas alternativas.
 Una alternativa a la arquitectura presentada, podría ser otra basada en Microservicios. El diagrama que se muestra a continuación, respresenta dicha arquitectura eludiendo elementos asociados a dicha arquitectura como el service discovery o un servicio de monitorización, que se dan por obvios.
 
-![Image](./arquitecturamicroservicios.png)
+![Image](./arquitecturamicroservicios.png =1000x530 "arquitecturamicroservicios.png")
+*arquitecturamicroservicios.png*
