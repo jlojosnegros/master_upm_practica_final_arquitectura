@@ -13,7 +13,7 @@ if (type is application) then
 :Normalize Severity;
 endif
 |Text Splitter|
-:Split Text as st;
+:Split Text;
 |Word Filter|
 :Filter Words;
 |Log Adder|
