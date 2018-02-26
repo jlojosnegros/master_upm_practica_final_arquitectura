@@ -88,6 +88,8 @@ La primera de las etapas de este Pipeline se encargaría de, en función del val
 ![Image](./dinamicos/communications.png)
 ### Actividad del Pipeline
 ![Image](./dinamicos/Pipeline.png)
+### Diagrama de Secuencia
+![Image](./dinamicos/sequence.png)
 
 <div style="page-break-after: always;"></div>
 
